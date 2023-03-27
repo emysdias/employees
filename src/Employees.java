@@ -1,7 +1,6 @@
 package src;
 
 import java.time.YearMonth;
-import java.util.ArrayList;
 
 public class Employees {
 
@@ -12,6 +11,9 @@ public class Employees {
   static int secretarySalary = 7000;
   static int sellerSalary = 12000;
   static int managerSalary = 20000;
+  static float benefitPercentageSeller = 0.3f;
+  static float benefitPercentageSecretary = 0.2f;
+  static float benefitPercentageManager = 0.0f;
 
   private float totalAmountSalaryWithBenefits(
     float salary,
@@ -43,7 +45,7 @@ public class Employees {
     float salary = 0.0f;
     for (Sales s : employee.sellersSales) {
       if (s.getMonth() == month && s.getYear() == year) {
-        salary = s.getValue() * 0.3f;
+        salary = s.getValue() * benefitPercentageSeller;
       }
     }
 
@@ -63,14 +65,16 @@ public class Employees {
         if (e.role == "Secretário") {
           salary = secretarySalary;
           totalAmountPaid +=
-            salary + totalAmountSalaryWithBenefits(salary, 0.2f);
+            salary +
+            totalAmountSalaryWithBenefits(salary, benefitPercentageSecretary);
         } else if (e.role == "Vendedor") {
           salary = sellerSalary;
           totalAmountPaid += salary + totalPaidToSeller(e, month, year);
         } else if (e.role == "Gerente") {
           salary = managerSalary;
           totalAmountPaid +=
-            salary + totalAmountSalaryWithBenefits(salary, 0.0f);
+            salary +
+            totalAmountSalaryWithBenefits(salary, benefitPercentageManager);
         }
       }
     }
@@ -109,10 +113,13 @@ public class Employees {
     for (Employees e : employee) {
       if (checkIfDateComesAfter(e.hiring, month, year)) {
         if (e.role == "Secretário") {
-          totalAmountPaid =
-            +totalAmountSalaryWithBenefits(secretarySalary, 0.2f);
+          totalAmountPaid +=
+            totalAmountSalaryWithBenefits(
+              secretarySalary,
+              benefitPercentageSecretary
+            );
         } else if (e.role == "Vendedor") {
-          totalAmountPaid = +totalAmountSalaryWithBenefits(sellerSalary, 0.2f);
+          totalAmountPaid += totalPaidToSeller(e, month, year);
         }
       }
     }
@@ -137,15 +144,18 @@ public class Employees {
         if (e.role == "Secretário") {
           salary = secretarySalary;
           totalAmountPaid =
-            salary + totalAmountSalaryWithBenefits(salary, 0.2f);
+            salary +
+            totalAmountSalaryWithBenefits(salary, benefitPercentageSecretary);
         } else if (e.role == "Vendedor") {
           salary = sellerSalary;
           totalAmountPaid =
-            salary + totalAmountSalaryWithBenefits(salary, 0.3f);
+            salary +
+            totalAmountSalaryWithBenefits(salary, benefitPercentageSeller);
         } else if (e.role == "Gerente") {
           salary = managerSalary;
           totalAmountPaid =
-            salary + totalAmountSalaryWithBenefits(salary, 0.0f);
+            salary +
+            totalAmountSalaryWithBenefits(salary, benefitPercentageManager);
         }
       }
     }
@@ -168,11 +178,13 @@ public class Employees {
         if (e.role == "Secretário") {
           salary = secretarySalary;
           totalAmountPaid =
-            salary + totalAmountSalaryWithBenefits(salary, 0.2f);
+            salary +
+            totalAmountSalaryWithBenefits(salary, benefitPercentageSecretary);
         } else if (e.role == "Vendedor") {
           salary = sellerSalary;
           totalAmountPaid =
-            salary + totalAmountSalaryWithBenefits(salary, 0.3f);
+            salary +
+            totalAmountSalaryWithBenefits(salary, benefitPercentageSeller);
         }
         if (totalAmountPaid > highestWage) {
           highestWage = totalAmountPaid;
@@ -199,7 +211,8 @@ public class Employees {
         if (e.role == "Vendedor") {
           salary = sellerSalary;
           totalAmountPaid =
-            salary + totalAmountSalaryWithBenefits(salary, 0.3f);
+            salary +
+            totalAmountSalaryWithBenefits(salary, benefitPercentageSeller);
           if (totalAmountPaid > highestWage) {
             highestWage = totalAmountPaid;
             employeeName = e.name;
@@ -208,7 +221,7 @@ public class Employees {
       }
     }
 
-    return "O vendedor: " + employeeName + " vendeu " + highestWage + " reais.";
+    return "O vendedor: " + employeeName + " vendeu R$" + highestWage + " reais.";
   }
 
   public String getRole() {

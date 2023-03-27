@@ -87,14 +87,73 @@ public class Main {
     }
 
     // Método que retorna valor total pago (salário e benefício) a esses funcionários no mês
-    float totalPaidToEmployees = methods.totalAmountPaidInTheMonthWithBenefits(
+    float totalPaidToEmployeesWithBenefits = methods.totalAmountPaidInTheMonthWithBenefits(
       employee,
       4, // Exemplo de mês e ano
       2022
     );
 
     System.out.println(
-      "Valor pago aos funcionários com benefícios " + totalPaidToEmployees
+      "Valor pago aos funcionários com benefícios é R$" +
+      totalPaidToEmployeesWithBenefits +
+      " reais"
     );
+
+    // Método que retorna o total pago somente em salários no mês.
+    float totalPaidToEmployees = methods.totalAmountPaidInTheMonthWithoutBenefits(
+      employee,
+      4,
+      2022
+    );
+
+    System.out.println(
+      "Valor pago aos funcionários sem benefícios é R$" +
+      totalPaidToEmployees +
+      " reais"
+    );
+
+    // Método que retorna o total pago somente em benefícios no mês.
+    float totalPaidToEmployeesOnlyWithBenefits = methods.totalAmountPaidInTheMonthOnlyWithBenefits(
+      employee,
+      4,
+      2022
+    );
+
+    System.out.println(
+      "Valor pago aos funcionários que possuem benefícios é R$" +
+      totalPaidToEmployeesOnlyWithBenefits +
+      " reais"
+    );
+
+    // Método que retorna o valor mais alto no mês
+    float highestWageValue = methods.highestWagesOfEmployees(
+      employee,
+      4,
+      2022
+    );
+
+    System.out.println(
+      "Valor mais alto pago do mês é R$" + highestWageValue + " reais"
+    );
+
+    // Método que retorna o nome do funcionário que recebeu o valor mais alto em benefícios no mês.
+    String highestWageValueEmployeeName = methods.highestWageEmployeeName(
+      employee,
+      4,
+      2022
+    );
+
+    System.out.println(
+      "Valor mais pago do mês é do funcionário: " + highestWageValueEmployeeName
+    );
+
+    // Método que retorna o vendedor que mais vendeu
+    String highestWageValueOfSellers = methods.sellerWhoSoldTheMost(
+      employee,
+      4,
+      2022
+    );
+
+    System.out.println(highestWageValueOfSellers);
   }
 }
