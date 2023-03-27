@@ -19,46 +19,91 @@ public class Employees {
     return benefitPercentage * salary;
   }
 
-  public float totalAmountPaidInTheMonthWithBenefits(String role) {
+  private int monthCalcule(int month) {
+    int amountOfMonths = 12;
+    return amountOfMonths - month;
+  }
+
+  private boolean checkIfDateComesAfter(YearMonth date, int month, int year) {
+    int inputMonthValue = monthCalcule(month);
+    int employeeMonthValue = monthCalcule(date.getMonthValue());
+    if (date.getYear() < year) {
+      return true;
+    } else if (
+      date.getYear() == year && employeeMonthValue >= inputMonthValue
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public float totalAmountPaidInTheMonthWithBenefits(
+    Employees[] employee,
+    int month,
+    int year
+  ) {
     float totalAmountPaid = 0.0f;
     float salary = 0.0f;
 
-    if (role == "Secretário") {
-      salary = secretarySalary;
-      totalAmountPaid = salary + totalAmountSalaryWithBenefits(salary, 0.2f);
-    } else if (role == "Vendedor") {
-      salary = sellerSalary;
-      totalAmountPaid = salary + totalAmountSalaryWithBenefits(salary, 0.3f);
-    } else if (role == "Gerente") {
-      salary = managerSalary;
-      totalAmountPaid = salary + totalAmountSalaryWithBenefits(salary, 0.0f);
+    for (Employees e : employee) {
+      if (checkIfDateComesAfter(e.hiring, month, year)) {
+        if (e.role == "Secretário") {
+          salary = secretarySalary;
+          totalAmountPaid =
+            salary + totalAmountSalaryWithBenefits(salary, 0.2f);
+        } else if (e.role == "Vendedor") {
+          salary = sellerSalary;
+          totalAmountPaid =
+            salary + totalAmountSalaryWithBenefits(salary, 0.3f);
+        } else if (e.role == "Gerente") {
+          salary = managerSalary;
+          totalAmountPaid =
+            salary + totalAmountSalaryWithBenefits(salary, 0.0f);
+        }
+      }
     }
-
     return totalAmountPaid;
   }
 
-  public float totalAmountPaidInTheMonthWithoutBenefits(String role) {
+  public float totalAmountPaidInTheMonthWithoutBenefits(
+    Employees[] employee,
+    int month,
+    int year
+  ) {
     float salaryValue = 0.0f;
 
-    if (role == "Secretário") {
-      salaryValue = secretarySalary;
-    } else if (role == "Vendedor") {
-      salaryValue = sellerSalary;
-    } else if (role == "Gerente") {
-      salaryValue = managerSalary;
+    for (Employees e : employee) {
+      if (checkIfDateComesAfter(e.hiring, month, year)) {
+        if (e.role == "Secretário") {
+          salaryValue += secretarySalary;
+        } else if (e.role == "Vendedor") {
+          salaryValue += sellerSalary;
+        } else if (e.role == "Gerente") {
+          salaryValue += managerSalary;
+        }
+      }
     }
 
     return salaryValue;
   }
 
-  public float totalAmountPaidInTheMonthOnlyWithBenefits(String role) {
+  public float totalAmountPaidInTheMonthOnlyWithBenefits(
+    Employees[] employee,
+    int month,
+    int year
+  ) {
     float totalAmountPaid = 0.0f;
 
-    if (role == "Secretário") {
-      totalAmountPaid = totalAmountSalaryWithBenefits(secretarySalary, 0.2f);
-    } else if (role == "Vendedor") {
-      totalAmountPaid =
-        totalAmountSalaryWithBenefits(sellerSalary, 0.2f);
+    for (Employees e : employee) {
+      if (checkIfDateComesAfter(e.hiring, month, year)) {
+        if (e.role == "Secretário") {
+          totalAmountPaid =
+            +totalAmountSalaryWithBenefits(secretarySalary, 0.2f);
+        } else if (e.role == "Vendedor") {
+          totalAmountPaid = +totalAmountSalaryWithBenefits(sellerSalary, 0.2f);
+        }
+      }
     }
 
     return totalAmountPaid;
