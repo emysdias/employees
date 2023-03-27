@@ -1,13 +1,14 @@
 package src;
 
 import java.time.YearMonth;
+import java.util.ArrayList;
 
 public class Employees {
 
-  private float salary;
   private String role;
   private String name;
   private YearMonth hiring;
+  private ArrayList sellersSales;
   static int secretarySalary = 7000;
   static int sellerSalary = 12000;
   static int managerSalary = 20000;
@@ -48,17 +49,18 @@ public class Employees {
 
     for (Employees e : employee) {
       if (checkIfDateComesAfter(e.hiring, month, year)) {
+        System.out.println(e.name);
         if (e.role == "Secretário") {
           salary = secretarySalary;
-          totalAmountPaid =
+          totalAmountPaid +=
             salary + totalAmountSalaryWithBenefits(salary, 0.2f);
         } else if (e.role == "Vendedor") {
           salary = sellerSalary;
-          totalAmountPaid =
+          totalAmountPaid +=
             salary + totalAmountSalaryWithBenefits(salary, 0.3f);
         } else if (e.role == "Gerente") {
           salary = managerSalary;
-          totalAmountPaid =
+          totalAmountPaid +=
             salary + totalAmountSalaryWithBenefits(salary, 0.0f);
         }
       }
@@ -160,7 +162,6 @@ public class Employees {
             salary + totalAmountSalaryWithBenefits(salary, 0.2f);
         } else if (e.role == "Vendedor") {
           salary = sellerSalary;
-          System.out.println("$$$$$$$$$$$$$");
           totalAmountPaid =
             salary + totalAmountSalaryWithBenefits(salary, 0.3f);
         }
@@ -199,14 +200,6 @@ public class Employees {
     }
 
     return "O vendedor: " + employeeName + " vendeu " + highestWage + " reais.";
-  }
-
-  public float getSalary() {
-    return salary;
-  }
-
-  public float setSalary(float salary) {
-    return this.salary = salary;
   }
 
   public String getRole() {
