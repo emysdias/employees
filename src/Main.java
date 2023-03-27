@@ -33,12 +33,12 @@ public class Main {
     list.add(employee[2]);
 
     // display(list);
-    float value = amount.totalAmountPaidInTheMonthWithoutBenefits(
+    float value = amount.highestWagesOfEmployees(
       employee,
       1,
       2021
     );
-    System.out.println("Total pago somente em salários no mês: " + value);
+    System.out.println("O maior valor pago foi: " + value);
   }
   // public static void display(ArrayList<Employees> list) {
   //   for (Employees model : list) {

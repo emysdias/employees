@@ -109,6 +109,39 @@ public class Employees {
     return totalAmountPaid;
   }
 
+  public float highestWagesOfEmployees(
+    Employees[] employee,
+    int month,
+    int year
+  ) {
+    float highestWage = 0.0f;
+    float salary = 0.0f;
+    float totalAmountPaid = 0.0f;
+
+    for (Employees e : employee) {
+      if (checkIfDateComesAfter(e.hiring, month, year)) {
+        if (totalAmountPaid > highestWage) {
+          highestWage = totalAmountPaid;
+        }
+        if (e.role == "Secretário") {
+          salary = secretarySalary;
+          totalAmountPaid =
+            salary + totalAmountSalaryWithBenefits(salary, 0.2f);
+        } else if (e.role == "Vendedor") {
+          salary = sellerSalary;
+          totalAmountPaid =
+            salary + totalAmountSalaryWithBenefits(salary, 0.3f);
+        } else if (e.role == "Gerente") {
+          salary = managerSalary;
+          totalAmountPaid =
+            salary + totalAmountSalaryWithBenefits(salary, 0.0f);
+        }
+      }
+    }
+
+    return highestWage;
+  }
+
   public float getSalary() {
     return salary;
   }
