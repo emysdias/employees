@@ -39,7 +39,7 @@ public class Main {
     list.add(employee[1]);
 
     employee[2].setName("Ana Silva");
-    employee[2].setRole("Vendedors");
+    employee[2].setRole("Vendedor");
     employee[2].setHiring(YearMonth.of(2021, 12));
     totalAmountPaidWithBenefits =
       employee[2].totalAmountPaidInTheMonthOnlyWithBenefits(
