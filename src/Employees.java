@@ -174,6 +174,33 @@ public class Employees {
     return employeeName;
   }
 
+  public String sellerWhoSoldTheMost(
+    Employees[] employee,
+    int month,
+    int year
+  ) {
+    float highestWage = 0.0f;
+    float salary = 0.0f;
+    float totalAmountPaid = 0.0f;
+    String employeeName = "";
+
+    for (Employees e : employee) {
+      if (checkIfDateComesAfter(e.hiring, month, year)) {
+        if (e.role == "Vendedor") {
+          salary = sellerSalary;
+          totalAmountPaid =
+            salary + totalAmountSalaryWithBenefits(salary, 0.3f);
+          if (totalAmountPaid > highestWage) {
+            highestWage = totalAmountPaid;
+            employeeName = e.name;
+          }
+        }
+      }
+    }
+
+    return "O vendedor: " + employeeName + " vendeu " + highestWage + " reais.";
+  }
+
   public float getSalary() {
     return salary;
   }
