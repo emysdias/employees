@@ -17,7 +17,7 @@ public class Main {
     }
 
     employee[0].setName("Jorge Carvalho");
-    employee[0].setRole("Secretário");
+    employee[0].setRole("Vendedor");
     employee[0].setHiring(YearMonth.of(2018, 1));
 
     employee[1].setName("Maria Souza");
@@ -25,7 +25,7 @@ public class Main {
     employee[1].setHiring(YearMonth.of(2015, 12));
 
     employee[2].setName("Ana Silva");
-    employee[2].setRole("Vendedor");
+    employee[2].setRole("Secretário");
     employee[2].setHiring(YearMonth.of(2021, 12));
 
     list.add(employee[0]);
@@ -33,12 +33,12 @@ public class Main {
     list.add(employee[2]);
 
     // display(list);
-    float value = amount.highestWagesOfEmployees(
+    String value = amount.highestWageEmployeeName(
       employee,
-      1,
+      12,
       2021
     );
-    System.out.println("O maior valor pago foi: " + value);
+    System.out.println("Nome do que recebeu o maior valor: " + value);
   }
   // public static void display(ArrayList<Employees> list) {
   //   for (Employees model : list) {

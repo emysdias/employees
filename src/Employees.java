@@ -142,6 +142,38 @@ public class Employees {
     return highestWage;
   }
 
+  public String highestWageEmployeeName(
+    Employees[] employee,
+    int month,
+    int year
+  ) {
+    float highestWage = 0.0f;
+    float salary = 0.0f;
+    float totalAmountPaid = 0.0f;
+    String employeeName = "";
+
+    for (Employees e : employee) {
+      if (checkIfDateComesAfter(e.hiring, month, year)) {
+        if (e.role == "Secretário") {
+          salary = secretarySalary;
+          totalAmountPaid =
+            salary + totalAmountSalaryWithBenefits(salary, 0.2f);
+        } else if (e.role == "Vendedor") {
+          salary = sellerSalary;
+          System.out.println("$$$$$$$$$$$$$");
+          totalAmountPaid =
+            salary + totalAmountSalaryWithBenefits(salary, 0.3f);
+        }
+        if (totalAmountPaid > highestWage) {
+          highestWage = totalAmountPaid;
+          employeeName = e.name;
+        }
+      }
+    }
+
+    return employeeName;
+  }
+
   public float getSalary() {
     return salary;
   }
