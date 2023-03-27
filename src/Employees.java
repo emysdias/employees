@@ -8,7 +8,7 @@ public class Employees {
   private String role;
   private String name;
   private YearMonth hiring;
-  private ArrayList sellersSales;
+  private Sales[] sellersSales;
   static int secretarySalary = 7000;
   static int sellerSalary = 12000;
   static int managerSalary = 20000;
@@ -39,6 +39,17 @@ public class Employees {
     }
   }
 
+  private float totalPaidToSeller(Employees employee, int month, int year) {
+    float salary = 0.0f;
+    for (Sales s : employee.sellersSales) {
+      if (s.getMonth() == month && s.getYear() == year) {
+        salary = s.getValue() * 0.3f;
+      }
+    }
+
+    return salary;
+  }
+
   public float totalAmountPaidInTheMonthWithBenefits(
     Employees[] employee,
     int month,
@@ -49,15 +60,13 @@ public class Employees {
 
     for (Employees e : employee) {
       if (checkIfDateComesAfter(e.hiring, month, year)) {
-        System.out.println(e.name);
         if (e.role == "Secretário") {
           salary = secretarySalary;
           totalAmountPaid +=
             salary + totalAmountSalaryWithBenefits(salary, 0.2f);
         } else if (e.role == "Vendedor") {
           salary = sellerSalary;
-          totalAmountPaid +=
-            salary + totalAmountSalaryWithBenefits(salary, 0.3f);
+          totalAmountPaid += salary + totalPaidToSeller(e, month, year);
         } else if (e.role == "Gerente") {
           salary = managerSalary;
           totalAmountPaid +=
@@ -224,5 +233,13 @@ public class Employees {
 
   public YearMonth setHiring(YearMonth hiring) {
     return this.hiring = hiring;
+  }
+
+  public Sales[] getSellersSales() {
+    return sellersSales;
+  }
+
+  public Sales[] setSellersSales(Sales[] sales) {
+    return this.sellersSales = sales;
   }
 }
