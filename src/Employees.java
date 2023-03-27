@@ -31,6 +31,38 @@ public class Employees {
     return totalAmountPaid;
   }
 
+  public float totalAmountPaidInTheMonthWithoutBenefits(String role) {
+    float salaryValue = 0;
+
+    if (role == "Secretário") {
+      salaryValue = 7000;
+    } else if (role == "Vendedor") {
+      salaryValue = 12000;
+    } else if (role == "Gerente") {
+      salaryValue = 20000;
+    }
+
+    return salaryValue;
+  }
+
+  public float totalAmountPaidInTheMonthOnlyWithBenefits(String role) {
+    float benefitPercentage = 0.0f;
+    int salaryValue = 0;
+    float totalAmountPaid = 0.0f;
+
+    if (role == "Secretário") {
+      benefitPercentage = 0.2f;
+      salaryValue = 7000;
+      totalAmountPaid = benefitPercentage * salaryValue;
+    } else if (role == "Vendedor") {
+      benefitPercentage = 0.3f;
+      salaryValue = 12000;
+      totalAmountPaid = benefitPercentage * salaryValue;
+    }
+
+    return totalAmountPaid;
+  }
+
   public float getSalary() {
     return salary;
   }

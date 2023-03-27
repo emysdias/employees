@@ -20,7 +20,9 @@ public class Main {
     employee[0].setRole("Secretário");
     employee[0].setHiring(YearMonth.of(2018, 1));
     totalAmountPaidWithBenefits =
-      employee[0].totalAmountPaidInTheMonthWithBenefits(employee[0].getRole());
+      employee[0].totalAmountPaidInTheMonthOnlyWithBenefits(
+          employee[0].getRole()
+        );
     employee[0].setSalary(totalAmountPaidWithBenefits);
 
     list.add(employee[0]);
@@ -29,16 +31,20 @@ public class Main {
     employee[1].setRole("Secretário");
     employee[1].setHiring(YearMonth.of(2015, 12));
     totalAmountPaidWithBenefits =
-      employee[1].totalAmountPaidInTheMonthWithBenefits(employee[1].getRole());
+      employee[1].totalAmountPaidInTheMonthOnlyWithBenefits(
+          employee[1].getRole()
+        );
     employee[1].setSalary(totalAmountPaidWithBenefits);
 
     list.add(employee[1]);
 
     employee[2].setName("Ana Silva");
-    employee[2].setRole("Vendedor");
+    employee[2].setRole("Vendedors");
     employee[2].setHiring(YearMonth.of(2021, 12));
     totalAmountPaidWithBenefits =
-      employee[2].totalAmountPaidInTheMonthWithBenefits(employee[2].getRole());
+      employee[2].totalAmountPaidInTheMonthOnlyWithBenefits(
+          employee[2].getRole()
+        );
     employee[2].setSalary(totalAmountPaidWithBenefits);
 
     list.add(employee[2]);
